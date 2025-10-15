@@ -1,14 +1,28 @@
-# AWS Lambda Empty Function Project
+# Food Tracker Authentication Lambda - Development Guide
 
-This starter project consists of:
-* Function.cs - class file containing a class with a single function handler method
-* aws-lambda-tools-defaults.json - default argument settings for use with Visual Studio and command line deployment tools for AWS
+## Project Structure
 
-You may also have a test project depending on the options selected.
+This Lambda function project consists of:
+* **Function.cs** - Main Lambda handler implementing OAuth2 authentication flows with AWS Cognito
+* **Models/** - Data models for authentication requests and responses
+  * `AuthResponse.cs` - Access and refresh token response model
+  * `RefreshTokenRequest.cs` - Refresh token request model
+* **aws-lambda-tools-defaults.json** - Default deployment settings for AWS Lambda Tools
 
-The generated function handler is a simple method accepting a string argument that returns the uppercase equivalent of the input string. Replace the body of this method, and parameters, to suit your needs. 
+## Authentication Endpoints
 
-## Here are some steps to follow from Visual Studio:
+The Lambda function provides the following endpoints:
+- **`/auth`** - Exchange authorization code for tokens
+- **`/refresh`** - Refresh access tokens
+- **`/userInfo`** - Get user information from Cognito
+- **`/logout`** - Revoke tokens
+
+## Environment Variables Required
+
+- `FOOD_TRACKER_AUTH_KEY` - Base64 encoded client secret for Cognito
+- `FOOD_TRACKER_CLIENT_ID` - Cognito app client ID
+
+## Development from Visual Studio
 
 To deploy your function to AWS Lambda, right click the project in Solution Explorer and select *Publish to AWS Lambda*.
 
@@ -16,34 +30,32 @@ To view your deployed function open its Function View window by double-clicking 
 
 To perform testing against your deployed function use the Test Invoke tab in the opened Function View window.
 
-To configure event sources for your deployed function, for example to have your function invoked when an object is created in an Amazon S3 bucket, use the Event Sources tab in the opened Function View window.
-
 To update the runtime configuration of your deployed function use the Configuration tab in the opened Function View window.
 
 To view execution logs of invocations of your function use the Logs tab in the opened Function View window.
 
-## Here are some steps to follow to get started from the command line:
+## Development from Command Line
 
 Once you have edited your template and code you can deploy your application using the [Amazon.Lambda.Tools Global Tool](https://github.com/aws/aws-extensions-for-dotnet-cli#aws-lambda-amazonlambdatools) from the command line.
 
-Install Amazon.Lambda.Tools Global Tools if not already installed.
-```
-    dotnet tool install -g Amazon.Lambda.Tools
-```
-
-If already installed check if new version is available.
-```
-    dotnet tool update -g Amazon.Lambda.Tools
+### Install Amazon.Lambda.Tools Global Tools (if not already installed)
+```bash
+dotnet tool install -g Amazon.Lambda.Tools
 ```
 
-Execute unit tests
-```
-    cd "foodTrackerAuth/test/foodTrackerAuth.Tests"
-    dotnet test
+### Update to latest version (if already installed)
+```bash
+dotnet tool update -g Amazon.Lambda.Tools
 ```
 
-Deploy function to AWS Lambda
+### Execute unit tests
+```bash
+cd "foodTrackerAuth/test/foodTrackerAuth.Tests"
+dotnet test
 ```
-    cd "foodTrackerAuth/src/foodTrackerAuth"
-    dotnet lambda deploy-function
+
+### Deploy function to AWS Lambda
+```bash
+cd "foodTrackerAuth/src/foodTrackerAuth"
+dotnet lambda deploy-function
 ```
