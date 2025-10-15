@@ -6,9 +6,9 @@ An AWS Lambda function that provides token-based authentication using AWS Cognit
 
 ## Project Status
 
-**⚠️ Experimental Project - Not in Production**
+> **⚠️ Experimental Project - Not in Production**
 
-This project was created as an experiment while studying for AWS certification. The goal was to explore creating a token-based authentication system using AWS Lambda and AWS Cognito. 
+> This project was created as an experiment while studying for AWS certification. The goal was to explore creating a token-based authentication system using AWS Lambda and AWS Cognito. 
 
 **The experiment was successful**, demonstrating that such a system can be effectively implemented with Lambda functions. However, this project is:
 - ✅ **Working** - Successfully implements OAuth2 authentication flows with AWS Cognito
